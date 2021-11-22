@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.test_fx.TableWithDataController">
+   <children>
+      <TableView fx:id="TableData" layoutY="-1.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;">
+        <columns>
+          <TableColumn fx:id="quoteId" prefWidth="64.800048828125" text="quoteId" />
+          <TableColumn fx:id="quote" prefWidth="330.39996337890625" text="quote" />
+            <TableColumn fx:id="author" prefWidth="100.0" text="author" />
+            <TableColumn fx:id="series" prefWidth="105.60003662109375" text="series" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
