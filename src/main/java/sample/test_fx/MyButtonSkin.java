@@ -17,10 +17,10 @@ public class MyButtonSkin extends ButtonSkin {
 
         final FadeTransition fadeOut = new FadeTransition(Duration.millis(100));
         fadeOut.setNode(control);
-        fadeOut.setToValue(0.75);
+        fadeOut.setToValue(0.5);
         control.setOnMouseExited(e -> fadeOut.playFromStart());
 
-        control.setOpacity(0.75);
+        control.setOpacity(0.5);
     }
 
 }

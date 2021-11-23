@@ -2,6 +2,11 @@ package sample.test_fx;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import java.util.Date;
 
 public class Phrases {
@@ -34,6 +39,29 @@ public class Phrases {
                 tempObj.add(phrase);
         }
         return tempObj;
+    }
+
+    public void ReadAndParseToList(JSONGetter jsonGetter) {
+        String jsonString = jsonGetter.jsonIn;
+
+        Object obj = null;
+        try {
+            obj = new JSONParser().parse(jsonString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        JSONArray jsonArray = (JSONArray) obj;
+
+        for (Object jsonObject : jsonArray) {
+            JSONObject current = (JSONObject) jsonObject;
+            int quoteId = Integer.parseInt(String.valueOf(current.get("quote_id")));
+            String quote = (String) current.get("quote");
+            String author = (String) current.get("author");
+            String series = (String) current.get("series");
+            BreakingBadPhrase bbp = new BreakingBadPhrase(quoteId, quote, author, series);
+            phrases.add(bbp);
+        }
     }
 
     @Override

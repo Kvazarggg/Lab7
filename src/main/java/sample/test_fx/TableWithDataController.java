@@ -3,7 +3,6 @@ package sample.test_fx;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.beans.property.Property;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,10 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 public class TableWithDataController implements Initializable {
 
@@ -51,29 +46,8 @@ public class TableWithDataController implements Initializable {
         JSONGetter.url = "https://breakingbadapi.com/api/quotes";
         jsonGetter.run();
 
-        String jsonString = jsonGetter.jsonIn;
-
-        Object obj = null;
-        try {
-            obj = new JSONParser().parse(jsonString);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        System.out.println();
-
-        JSONArray jsonArray = (JSONArray) obj;
-
         Phrases phrases = new Phrases();
-
-        for (Object jsonObject : jsonArray) {
-            JSONObject current = (JSONObject) jsonObject;
-            int quoteId = Integer.parseInt(String.valueOf(current.get("quote_id")));
-            String quote = (String) current.get("quote");
-            String author = (String) current.get("author");
-            String series = (String) current.get("series");
-            BreakingBadPhrase bbp = new BreakingBadPhrase(quoteId, quote, author, series);
-            phrases.add(bbp);
-        }
+        phrases.ReadAndParseToList(jsonGetter);
 
         quoteId.setCellValueFactory(new PropertyValueFactory<BreakingBadPhrase, Integer>("quoteId"));
         quote.setCellValueFactory(new PropertyValueFactory<BreakingBadPhrase, String>("quote"));
